@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-container">
+    <h2>Your Profile</h2>
+    <div id="profileInfo"></div>
+
+    <button class="btn" onclick="window.location.href='edit-profile.html'">Edit Profile</button>
+    <button class="btn" onclick="window.location.href='change-password.html'">Change Password</button>
+    <button class="btn" onclick="auth.logout()">Logout</button>
+
+    <p><a href="index.html">← Back to Store</a></p>
+</div>
+
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    auth.checkLogin();
+    const user = auth.getLoggedInUser();
+
+    document.getElementById("profileInfo").innerHTML = `
+        <p><strong>Name:</strong> ${user.name}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Role:</strong> ${user.role}</p>
+    `;
+});
+</script>
+
+</body>
+</html>

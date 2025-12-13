@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-container">
+    <h2>Edit Profile</h2>
+    <form id="editProfileForm">
+        <input type="text" id="editName" placeholder="Full Name" required>
+        <input type="email" id="editEmail" placeholder="Email" required>
+        <button class="btn" type="submit">Save Changes</button>
+    </form>
+    <p id="editProfileMsg" style="margin-top:10px;"></p>
+    <p><a href="profile.html">← Back to Profile</a></p>
+</div>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+</body>
+</html>

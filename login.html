@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+      <input id="loginEmail" type="email" placeholder="Email" required>
+      <input id="loginPassword" type="password" placeholder="Password" required>
+      <button class="btn" type="submit">Login</button>
+    </form>
+
+    <!-- Corrected ID -->
+    <p id="loginError" style="color:red;margin-top:8px;"></p>
+    <p style="margin-top:10px;">
+      <a href="forgot-password.html" id="showForgotPassword">Forgot Password?</a>
+    </p>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+
+  <script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Order Success</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Order Placed ✅</h2>
+    <div id="successDetails"></div>
+
+    <div style="margin-top:14px;">
+      <a class="btn" href="order-history.html">View Order History</a>
+      <a class="btn" href="index.html" style="margin-left:10px;">Back to Shop</a>
+    </div>
+  </div>
+
+  <script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module" src="orders.js"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  auth.checkLogin();
+
+  const lastId = window.orders.getLastOrderId();
+  const order = lastId ? window.orders.getOrderById(lastId) : null;
+
+  if (!order) {
+    window.location.href = "cart.html";
+    return;
+  }
+
+  document.getElementById("successDetails").innerHTML = `
+    <p><strong>Order ID:</strong> ${order.id}</p>
+    <p><strong>Status:</strong> ${order.status}</p>
+    <p><strong>Delivery date:</strong> ${order.deliveryDate}</p>
+    <p><strong>Total:</strong> ${window.orders.formatCurrency(order.total)}</p>
+    <p><strong>Payment:</strong> ${order.paymentMethod}</p>
+  `;
+});
+</script>
+
+</body>
+</html>

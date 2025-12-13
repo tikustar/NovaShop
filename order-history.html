@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Order History</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Order History</h2>
+    <div id="ordersList"></div>
+    <p style="margin-top:12px;"><a href="index.html">← Back to Store</a></p>
+  </div>
+
+  <script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+  <script type="module" src="orders.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  auth.checkLogin();
+
+  // Get the user's orders from the orders.js helper
+  const allOrders = window.orders.getOrders();
+  const list = document.getElementById("ordersList");
+
+  if (!list) return;
+
+  if (!allOrders || allOrders.length === 0) {
+    list.innerHTML = "<p>No orders yet.</p>";
+    return;
+  }
+
+  list.innerHTML = allOrders.map(o => `
+    <div class="order-card" style="padding:12px; border:1px solid #eee; border-radius:10px; margin-bottom:10px;">
+      <p><strong>Order:</strong> ${o.id}</p>
+      <p><strong>Date:</strong> ${new Date(o.createdAt).toLocaleString()}</p>
+      <p><strong>Status:</strong> ${o.status}</p>
+      <p><strong>Total:</strong> ${window.orders.formatCurrency(o.total)}</p>
+      <p><strong>Delivery:</strong> ${o.deliveryDate}</p>
+      <p><strong>Payment:</strong> ${o.paymentMethod}</p>
+    </div>
+  `).join("");
+});
+</script>
+</body>
+</html>

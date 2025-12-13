@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shop</title>
+    <link rel="stylesheet" href="stylesss.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">NovaShop</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="profile.html">Profile</a>
+        <a href="order-history.html">Order</a>
+    </nav>
+    <button onclick="auth.logout()" class="btn">Logout</button>
+</header>
+
+<section class="hero">
+    <h1>Welcome to NovaShop</h1>
+    <p>Your favorite place to shop online.</p>
+    <a href="products.html" class="btn">Shop Now</a>
+</section>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+<script>
+    auth.checkLogin(); // optional: protect homepage
+</script>
+
+</body>
+</html>

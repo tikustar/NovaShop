@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Payment</h2>
+
+    <div id="paySummary"></div>
+
+    <h3 style="margin-top:18px;">Choose Payment Method</h3>
+    <div class="payment-options">
+      <label><input type="radio" name="payment" value="Bank Transfer" checked /> Bank Transfer</label><br/>
+      <label><input type="radio" name="payment" value="Bank Card" /> Bank Card</label><br/>
+    </div>
+
+    <button class="btn" id="payBtn" style="margin-top:14px;">Place Order</button>
+    <p id="payMsg" style="margin-top:10px;"></p>
+    <p><a href="cart.html">← Back to Cart</a></p>
+  </div>
+
+ <script type="module" src="firebase.js"></script>
+<script type="module" src="orders.js"></script>
+<script>
+function selectPayment(method){
+    try {
+        const order = orders.placeOrder(method);
+        window.location.href = "order-success.html";
+    } catch (e) {
+        alert("Error: No pending order found");
+    }
+}
+</script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      auth.checkLogin();
+
+      const pending = orders.loadPending();
+      if (!pending) {
+        alert("No order found. Please go through checkout again.");
+        window.location.href = "cart.html";
+        return;
+      }
+
+      document.getElementById("paySummary").innerHTML = `
+        <p><strong>Delivery address:</strong> ${pending.address}</p>
+        <p><strong>Delivery date:</strong> ${pending.deliveryDate}</p>
+        <p><strong>Products total:</strong> ${orders.formatCurrency(pending.productsTotal)}</p>
+        <p><strong>Delivery fee:</strong> ${orders.formatCurrency(pending.deliveryFee)}</p>
+        <p><strong>Total:</strong> ${orders.formatCurrency(pending.total)}</p>
+      `;
+
+      document.getElementById("payBtn").addEventListener("click", () => {
+        const method = document.querySelector('input[name="payment"]:checked').value;
+        try {
+          orders.placeOrder(method);
+          window.location.href = "order-success.html";
+        } catch (err) {
+          document.getElementById("payMsg").style.color = "red";
+          document.getElementById("payMsg").innerText = err.message || "Payment failed.";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

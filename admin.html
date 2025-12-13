@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – Add Products</title>
+    <link rel="stylesheet" href="stylesss.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">NovaShop Admin</div>
+    <nav>
+        <a href="products.html">View Store</a>
+        <button onclick="toggleDarkMode()" class="dark-btn">🌙</button>
+    </nav>
+    <button onclick="adminLogout()" class="btn delete">Logout</button>
+
+</header>
+
+<section class="admin-container">
+    <h2>Add New Product</h2>
+
+    <form id="productForm" class="admin-form">
+        <input type="text" id="name" placeholder="Product Name" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <input type="text" id="category" placeholder="Category (e.g. shoes)" required>
+        <input type="text" id="image" placeholder="Image URL" required>
+
+        <button type="submit" class="btn">Add Product</button>
+    </form>
+
+    <h3>All Products</h3>
+    <table class="admin-table" id="admin-product-table"></table>
+</section>
+
+<script>
+  // redirect to login if not logged in
+  // uses the global auth.checkLogin exposed by auth.js
+  auth.checkLogin('login.html'); // change redirectPath if needed
+</script>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module" src="script.js"></script>
+
+<script>
+    loadAdminProducts();
+</script>
+<script>
+    checkAdmin(); // Protect the page
+</script>
+
+<script>
+    // Check admin access
+    const user = auth.getLoggedInUser();
+    
+    if (!user) {
+        // Not logged in at all
+        window.location.href = "login.html";
+    } else if (user.role !== "admin") {
+        // Logged in but not admin
+        alert("Access denied. Admins only.");
+        window.location.href = "index.html";
+    }
+</script>
+</body>
+</html>

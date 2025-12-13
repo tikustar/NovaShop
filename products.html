@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="stylesss.css">
+</head>
+<script src="script.js"></script>
+
+<script>
+    loadStoreProducts(); // Load products when page opens
+</script>
+<body>
+
+<header class="navbar">
+    <div class="logo">NovaShop</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+    <button onclick="toggleDarkMode()" class="dark-btn">🌙</button>
+</header>
+
+<section class="products">
+    <h2>Our Products</h2>
+
+    
+    <input type="text" id="search" placeholder="Search products..." onkeyup="searchProducts()" class="search-box">
+
+  
+    <div class="filters">
+        <button onclick="filterCategory('all')">All</button>
+        <button onclick="filterCategory('clothes')">Clothes</button>
+        <button onclick="filterCategory('shoes')">Shoes</button>
+        <button onclick="filterCategory('electronics')">Electronics</button>
+    </div>
+
+    <div id="storeProducts" class="product-grid"></div>
+
+</section>
+<script type="module" src="script.js"></script>
+<script>
+    loadStoreProducts();
+</script>
+</body>
+</html>

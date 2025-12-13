@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Your Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-container">
+<section id="placeOrderSection" style="margin-top: 30px;">
+    <h2>Place Your Order</h2>
+
+    <label>Your Delivery Address:</label>
+    <input type="text" id="addressInput" placeholder="Enter your delivery address" required>
+
+    <p id="deliveryDate"></p>
+
+    <h3>Order Summary</h3>
+    <p>Products Total: <span id="summaryTotal">₦0</span></p>
+    <p>Delivery Fee: ₦1500</p>
+    <p><strong>Grand Total: <span id="grandTotal">₦0</span></strong></p>
+
+    <button class="btn" id="confirmOrderBtn">Confirm Order</button>
+</section>
+</div>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module" src="script.js"></script>
+<script>
+auth.checkLogin();
+</script>
+
+</body>
+</html>
